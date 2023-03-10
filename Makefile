@@ -6,7 +6,7 @@
 #    By: hguillau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:56:20 by hguillau          #+#    #+#              #
-#    Updated: 2023/03/09 15:58:45 by hguillau         ###   ########.fr        #
+#    Updated: 2023/03/10 11:41:07 by hguillau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,12 @@ CC      	=		gcc
 
 RM      	=		rm -f
 
-CFLAGS  	=		-Wall -Wextra -Werror -Imlx #-g -fsanitize=address
+CFLAGS  	=		-Wall -Wextra -Werror #-g -fsanitize=address
 
 all:				${NAME}
 
 ${NAME}:			${OBJS}
-					${CC} ${CFLAGS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJS} ${LIBFT}
+					${CC} ${CFLAGS} -o ${NAME} ${OBJS} 
 
 clean:
 					${RM} ${OBJS}
