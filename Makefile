@@ -6,13 +6,14 @@
 #    By: hguillau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:56:20 by hguillau          #+#    #+#              #
-#    Updated: 2023/03/14 16:44:49 by hguillau         ###   ########.fr        #
+#    Updated: 2023/03/17 14:33:57 by hguillau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    	=		main.c						\
 					philo.c						\
 					philo_utils.c				\
+					routine.c					\
 
 OBJS    	=		${SRCS:.c=.o}
 

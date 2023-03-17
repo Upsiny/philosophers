@@ -6,22 +6,29 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:55:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/14 17:03:17 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:33:51 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	*ft_philo(void* raw_data)
+void	ft_new_philo(t_data *data, int i)
+{
+	t_philo			*philo;
+
+	philo = malloc(sizeof(t_philo));
+
+	philo->id = i;
+	data->philo[i] = philo;
+	printf("philo creer\n");
+}
+
+void	*ft_new_thread(void* raw_data)
 {
 	t_data	*data;
 
 	data = raw_data;
 	printf("bonjour, je suis un philosopher !\n");
-	while (1) {
-		printf ("je suis philo idiot numeros %d\n", );
-		sleep(1);
-	}
 	return (NULL);
 }
 
@@ -30,12 +37,16 @@ void	ft_create_philos(t_data *data)
 	int	i;
 
 	i = 1;
-	pthread_t	tid[data->nb_philo];
 	while (data->nb_philo >= i)
 	{
-		pthread_create(&tid[i], NULL, ft_philo, data);
-		pthread_join(tid[i], NULL); // utiliser un mutex;
+		ft_new_philo(data, i);
+//		pthread_create(&data->tid[i], NULL, ft_new_thread, data);
 		i++;
+	}
+	while (i >= 0)
+	{
+		pthread_join(data->tid[i], NULL);
+		i--;
 	}
 }
 
