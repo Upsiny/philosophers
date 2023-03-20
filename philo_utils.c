@@ -6,11 +6,20 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/14 16:39:25 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:10:10 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	ft_usleep(int i)
+{
+	while (i >= 0)
+	{
+		usleep(50);
+		i = i - 50;
+	}
+}
 
 int	ft_atoi(char *str)
 {

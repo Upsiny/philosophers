@@ -6,7 +6,7 @@
 /*   By: hguillau <hguillau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:58:57 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/17 16:33:56 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:10:08 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ typedef struct s_data {
 	int				time_to_eat;
 	int				time_to_sleep;
 	pthread_t		tid[200];
+	pthread_mutex_t	*fourchette;
+	pthread_mutex_t	*mutex;
 	struct s_philo	*philo[200];
 }	t_data;
 
 typedef struct	s_philo {
-	pthread_mutex_t	fourchette;
 	int				id;
 	t_data			data;
 }	t_philo;
@@ -39,12 +40,13 @@ typedef struct	s_philo {
 |							 PHILO								 |
 \****************************************************************/
 
-void	ft_start_routine(t_philo philo);
+void	ft_start_routine(t_philo *philo);
 
 /****************************************************************\
 |                            UTILS                               |
 \****************************************************************/
 
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
+void	ft_usleep(int i);
 
 #endif
