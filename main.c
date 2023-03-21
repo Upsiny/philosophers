@@ -6,13 +6,13 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:55:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/20 17:10:19 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:58:45 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	ft_new_philo(t_data *data, int i)
+t_philo	*ft_new_philo(t_data *data, int i)
 {
 	t_philo			*philo;
 
@@ -20,15 +20,14 @@ void	ft_new_philo(t_data *data, int i)
 
 	philo->id = i;
 	data->philo[i] = philo;
-	printf("philo creer\n");
+	philo->data = data;
+	printf("created philo\n");
+	return (philo);
 }
 
-void	*ft_new_thread(void* raw_data)
+void	*ft_new_thread(void* philo)
 {
-	t_data	*data;
-
-	data = raw_data;
-	printf("bonjour, je suis un philosopher !\n");
+	ft_start_routine(philo);
 	return (NULL);
 }
 
@@ -39,8 +38,8 @@ void	ft_create_philos(t_data *data)
 	i = 1;
 	while (data->nb_philo >= i)
 	{
-		ft_new_philo(data, i);
-//		pthread_create(&data->tid[i], NULL, ft_new_thread, data);
+		data->philo[i] = ft_new_philo(data, i);
+		pthread_create(&data->tid[i], NULL, ft_new_thread, data->philo[i]);
 		i++;
 	}
 	while (i >= 0)
@@ -53,12 +52,10 @@ void	ft_create_philos(t_data *data)
 int	main(int ac, char **av)
 {
 	(void)ac;
-	t_data	*data;
+	t_data	data;
 
-	data = malloc(sizeof(data));
-	data->nb_philo = ft_atoi(av[1]);
-//	data->time_to_die = ft_atoi(av[2]);
-//	data->time_to_eat = ft_atoi(av[3]);
-//	data->time_to_sleep = ft_atoi(av[4]);
-	ft_create_philos(data);
+	data.mutex = malloc(sizeof(pthread_mutex_t));
+	if (ft_parse(ac, av, &data) != 1)
+		return (0);
+	ft_create_philos(&data);
 }

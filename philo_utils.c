@@ -6,11 +6,27 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/20 17:10:10 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:06:39 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+int	ft_parse(int ac, char **av, t_data *data)
+{
+	if (ac >= 5 && ac <= 6)
+	{
+		data->nb_philo = ft_atoi(av[1]);
+		data->time_to_die = ft_atoi(av[2]) * 1000;
+		data->time_to_eat = ft_atoi(av[3]) * 1000;
+		data->time_to_sleep = ft_atoi(av[4]) * 1000;
+		if (ac == 6)
+			data->must_eat = ft_atoi(av[5]);
+		pthread_mutex_init(data->mutex, NULL);
+		return (1);
+	}
+	return (0);
+}
 
 void	ft_usleep(int i)
 {
