@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/21 11:06:39 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:48:01 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_parse(int ac, char **av, t_data *data)
 	if (ac >= 5 && ac <= 6)
 	{
 		data->nb_philo = ft_atoi(av[1]);
-		data->time_to_die = ft_atoi(av[2]) * 1000;
-		data->time_to_eat = ft_atoi(av[3]) * 1000;
-		data->time_to_sleep = ft_atoi(av[4]) * 1000;
+		data->time_to_die = ft_atoi(av[2]);
+		data->time_to_eat = ft_atoi(av[3]);
+		data->time_to_sleep = ft_atoi(av[4]);
 		if (ac == 6)
 			data->must_eat = ft_atoi(av[5]);
 		pthread_mutex_init(data->mutex, NULL);
@@ -28,12 +28,24 @@ int	ft_parse(int ac, char **av, t_data *data)
 	return (0);
 }
 
+long long int	ft_time()
+{
+	struct	timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
+}
+
 void	ft_usleep(int i)
 {
-	while (i >= 0)
+	long long int	need;
+	struct	timeval	time;
+
+	gettimeofday(&time, NULL);
+	need = ((time.tv_sec) * 1000 + (time.tv_usec) / 1000) + i;
+	while (ft_time() <= need)
 	{
 		usleep(50);
-		i = i - 50;
 	}
 }
 
@@ -62,4 +74,14 @@ int	ft_atoi(char *str)
 	}
 	result *= neg;
 	return (result);
+}
+
+void	print_time(long long int start)
+{
+	struct	timeval	current_time;
+	long long int	now;
+
+	gettimeofday(&current_time, NULL);
+	now = (current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000;
+	printf("%lld ", now - start);
 }
