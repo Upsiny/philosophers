@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/24 11:53:00 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/24 17:30:22 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long long int	ft_time(void)
 	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }
 
-void	ft_usleep(int i)
+void	ft_usleep(int i, t_data *data)
 {
 	long long int	need;
 	struct timeval	time;
@@ -45,6 +45,13 @@ void	ft_usleep(int i)
 	need = ((time.tv_sec) * 1000 + (time.tv_usec) / 1000) + i;
 	while (ft_time() <= need)
 	{
+		pthread_mutex_lock(data->for_death);
+		if (data->is_alive != 1)
+		{
+			pthread_mutex_unlock(data->for_death);
+			return ;
+		}
+		pthread_mutex_unlock(data->for_death);
 		usleep(50);
 	}
 }
