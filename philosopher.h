@@ -6,7 +6,7 @@
 /*   By: hguillau <hguillau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:58:57 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/21 16:20:55 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:51:09 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
-struct s_philo;
+struct	s_philo;
 
 typedef struct s_data {
 	int				nb_philo;
@@ -28,21 +29,20 @@ typedef struct s_data {
 	int				time_to_sleep;
 	int				must_eat;
 	long long int	time_start;
+	bool			is_alive;
 	pthread_t		tid[200];
+	pthread_t		death;
+	pthread_mutex_t	for_death;
 	pthread_mutex_t	straw[200];
 	pthread_mutex_t	*mutex;
 	struct s_philo	*philo[200];
 }	t_data;
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	int				id;
+	long long int	last_eat;
 	t_data			*data;
 }	t_philo;
-
-/*struct timeval {
-    time_t      tv_sec;   secondes 
-    suseconds_t tv_usec;  microsecondes 
-};*/
 
 /****************************************************************\
 |							 PHILO								 |
@@ -50,13 +50,17 @@ typedef struct	s_philo {
 
 int		ft_parse(int ac, char **av, t_data *data);
 void	ft_start_routine(t_philo *philo);
+void	*ft_death(void *dat);
 
 /****************************************************************\
 |                            UTILS                               |
 \****************************************************************/
 
-int		ft_atoi(char *str);
-void	ft_usleep(int i);
-void	print_time(long long int start);
+int				ft_atoi(char *str);
+long long int	ft_time(void);
+void			ft_usleep(int i);
+void			print_time(long long int start);
+void			ft_print(char *msg, pthread_mutex_t *mutex,
+		int id, t_philo *philo);
 
 #endif

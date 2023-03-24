@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/22 11:48:01 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:53:00 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_parse(int ac, char **av, t_data *data)
 	return (0);
 }
 
-long long int	ft_time()
+long long int	ft_time(void)
 {
-	struct	timeval	current_time;
+	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
 	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
@@ -39,7 +39,7 @@ long long int	ft_time()
 void	ft_usleep(int i)
 {
 	long long int	need;
-	struct	timeval	time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	need = ((time.tv_sec) * 1000 + (time.tv_usec) / 1000) + i;
@@ -78,7 +78,7 @@ int	ft_atoi(char *str)
 
 void	print_time(long long int start)
 {
-	struct	timeval	current_time;
+	struct timeval	current_time;
 	long long int	now;
 
 	gettimeofday(&current_time, NULL);

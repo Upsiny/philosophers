@@ -6,12 +6,12 @@
 #    By: hguillau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:56:20 by hguillau          #+#    #+#              #
-#    Updated: 2023/03/22 11:47:57 by hguillau         ###   ########.fr        #
+#    Updated: 2023/03/22 13:53:43 by hguillau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    	=		main.c						\
-					philo.c						\
+					death.c						\
 					philo_utils.c				\
 					routine.c					\
 
