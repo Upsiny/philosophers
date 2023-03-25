@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:30:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/24 17:23:00 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:01:15 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,35 @@
 
 void	ft_print(char *msg, pthread_mutex_t *mutex, int id, t_philo *philo)
 {
-	pthread_mutex_lock(mutex);
-	print_time(philo->data->time_start);
-	printf("%d %s\n", id, msg);
-	pthread_mutex_unlock(mutex);
+	if (!ft_check_death(philo))
+	{
+		pthread_mutex_lock(mutex);
+		print_time(philo->data->time_start);
+		printf("%d %s\n", id, msg);
+		pthread_mutex_unlock(mutex);
+	}
+	else
+		return ;
 }
 
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->straw[philo->id -1]);
 	ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
-	if (philo->id == philo->data->nb_philo)
+	if ((philo->id == philo->data->nb_philo && !ft_check_death(philo)) && philo->data->nb_philo != 1)
 	{
 		pthread_mutex_lock(&philo->data->straw[0]);
 		ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->data->straw[philo->id]);
-		ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
+		if (philo->data->nb_philo != 1)
+		{
+			pthread_mutex_lock(&philo->data->straw[philo->id]);
+			ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
+		}
+		else
+			ft_usleep(philo->data->time_to_die * 2, philo->data);
 	}
 	ft_print("is eating", philo->data->mutex, philo->id, philo);
 	pthread_mutex_lock(philo->data->for_death);
@@ -74,7 +84,7 @@ void	ft_start_routine(t_philo *philo)
 		ft_print("is thinking", philo->data->mutex, philo->id, philo);
 		ft_usleep(100, philo->data);
 	}
-	while (philo->data->must_eat >= i && ft_is_alive(philo) != 0)
+	while (philo->data->must_eat != (i - 1) && ft_is_alive(philo) != 0)
 	{
 		if (ft_is_alive(philo) != 0)
 			ft_eat(philo);

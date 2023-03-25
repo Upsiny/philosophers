@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:55:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/24 17:25:43 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:05:17 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_create_philos(t_data *data)
 	data->time_start = (current_time.tv_sec) * 1000
 		+ (current_time.tv_usec) / 1000;
 	data->end_routine = 0;
+	pthread_mutex_init(data->for_death, NULL);
 	while (data->nb_philo >= i)
 	{
 		data->philo[i] = ft_new_philo(data, i);
@@ -48,7 +49,6 @@ void	ft_create_philos(t_data *data)
 		pthread_mutex_init(&data->straw[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(data->for_death, NULL);
 	pthread_create(&data->death, NULL, ft_death, data);
 	while (i > 0)
 	{
@@ -66,6 +66,7 @@ int	main(int ac, char **av)
 	data->for_death = malloc(sizeof(pthread_mutex_t));
 	if (ft_parse(ac, av, data) != 1)
 		return (0);
-	ft_create_philos(data);
+	if (data->must_eat != 0)
+		ft_create_philos(data);
 	pthread_join(data->death, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: hguillau <hguillau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:58:57 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/24 17:21:08 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 14:59:30 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ typedef struct s_data {
 	long long int	time_start;
 	int				is_alive;
 	int				end_routine;
-	pthread_t		tid[200];
+	pthread_t		tid[201];
 	pthread_t		death;
 	pthread_mutex_t	*for_death;
-	pthread_mutex_t	straw[200];
+	pthread_mutex_t	straw[201];
 	pthread_mutex_t	*mutex;
-	struct s_philo	*philo[200];
+	struct s_philo	*philo[201];
 }	t_data;
 
 typedef struct s_philo {
@@ -50,6 +50,7 @@ typedef struct s_philo {
 \****************************************************************/
 
 int		ft_parse(int ac, char **av, t_data *data);
+int		ft_check_death(t_philo *philo);
 void	ft_start_routine(t_philo *philo);
 void	*ft_death(void *dat);
 

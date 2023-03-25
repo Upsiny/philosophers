@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/24 17:30:22 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 14:53:19 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ int	ft_parse(int ac, char **av, t_data *data)
 		data->time_to_eat = ft_atoi(av[3]);
 		data->time_to_sleep = ft_atoi(av[4]);
 		if (ac == 6)
+		{
 			data->must_eat = ft_atoi(av[5]);
+			if (data->must_eat <= 0)
+				return (0);
+		}
+		else
+			data->must_eat = -1;
+		if (data->nb_philo < 0 || data->time_to_die < 0 ||
+				data->time_to_eat < 0 || data->time_to_sleep < 0)
+			return (0);
 		pthread_mutex_init(data->mutex, NULL);
 		return (1);
 	}
