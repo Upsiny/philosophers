@@ -6,26 +6,13 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:30:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 15:12:11 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:22:28 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	ft_print(char *msg, pthread_mutex_t *mutex, int id, t_philo *philo)
-{
-	if (!ft_check_death(philo))
-	{
-		pthread_mutex_lock(mutex);
-		print_time(philo->data->time_start);
-		printf("%d %s\n", id, msg);
-		pthread_mutex_unlock(mutex);
-	}
-	else
-		return ;
-}
-
-void	ft_eat(t_philo *philo)
+void	ft_take_straw(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->straw[philo->id -1]);
 	ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
@@ -45,6 +32,11 @@ void	ft_eat(t_philo *philo)
 		else
 			ft_usleep(philo->data->time_to_die * 2, philo->data);
 	}
+}
+
+void	ft_eat(t_philo *philo)
+{
+	ft_take_straw(philo);
 	ft_print("is eating", philo->data->mutex, philo->id, philo);
 	pthread_mutex_lock(philo->data->for_death);
 	philo->last_eat = ft_time();
