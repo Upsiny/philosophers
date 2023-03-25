@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:44:00 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 19:11:04 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:43:08 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_diff(t_data *data)
 void	*ac_alive(t_data *data, int i)
 {
 	pthread_mutex_unlock(data->for_death);
-	ft_print("is dead", data->mutex, i, data->philo[i]);
+	ft_print("died", data->mutex, i, data->philo[i]);
 	pthread_mutex_lock(data->for_death);
 	data->is_alive = 0;
 	pthread_mutex_unlock(data->for_death);
