@@ -6,7 +6,7 @@
 /*   By: hguillau <hguillau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:58:57 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 14:59:30 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:48:56 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,15 @@ typedef struct s_philo {
 	t_data			*data;
 }	t_philo;
 
-/****************************************************************\
-|							 PHILO								 |
-\****************************************************************/
-
-int		ft_parse(int ac, char **av, t_data *data);
-int		ft_check_death(t_philo *philo);
-void	ft_start_routine(t_philo *philo);
-void	*ft_death(void *dat);
-
-/****************************************************************\
-|                            UTILS                               |
-\****************************************************************/
-
+int				ft_parse(int ac, char **av, t_data *data);
+int				ft_check_death(t_philo *philo);
+void			ft_start_routine(t_philo *philo);
+void			*ft_death(void *dat);
 int				ft_atoi(char *str);
 long long int	ft_time(void);
 void			ft_usleep(int i, t_data *data);
 void			print_time(long long int start);
 void			ft_print(char *msg, pthread_mutex_t *mutex,
-		int id, t_philo *philo);
+					int id, t_philo *philo);
 
 #endif

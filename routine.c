@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:30:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 15:01:15 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:12:11 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->straw[philo->id -1]);
 	ft_print("has taken a fork", philo->data->mutex, philo->id, philo);
-	if ((philo->id == philo->data->nb_philo && !ft_check_death(philo)) && philo->data->nb_philo != 1)
+	if ((philo->id == philo->data->nb_philo && !ft_check_death(philo))
+		&& philo->data->nb_philo != 1)
 	{
 		pthread_mutex_lock(&philo->data->straw[0]);
 		ft_print("has taken a fork", philo->data->mutex, philo->id, philo);

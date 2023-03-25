@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:44:00 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 15:07:46 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:09:07 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_diff(t_data *data)
 
 void	*ft_death(void *dat)
 {
-	t_data *data;
+	t_data			*data;
 	int				i;
 	long long int	time_death;
 	long long int	current_time;
