@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:30:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 19:22:28 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:51:11 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	ft_start_routine(t_philo *philo)
 	}
 	while (philo->data->must_eat != (i - 1) && ft_is_alive(philo) != 0)
 	{
-		if (ft_is_alive(philo) != 0)
-			ft_eat(philo);
+		ft_eat(philo);
 		if (ft_is_alive(philo) != 0)
 			ft_sleep(philo);
 		if (ft_is_alive(philo) != 0)

@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:46:51 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/25 19:34:43 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:50:36 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,4 @@ int	ft_atoi(char *str)
 	}
 	result *= neg;
 	return (result);
-}
-
-void	print_time(long long int start)
-{
-	struct timeval	current_time;
-	long long int	now;
-
-	gettimeofday(&current_time, NULL);
-	now = (current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000;
-	printf("%lld ", now - start);
 }
