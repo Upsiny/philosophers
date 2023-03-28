@@ -6,7 +6,7 @@
 #    By: hguillau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:56:20 by hguillau          #+#    #+#              #
-#    Updated: 2023/03/28 15:44:29 by hguillau         ###   ########.fr        #
+#    Updated: 2023/03/28 17:07:09 by hguillau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC      	=		gcc -g
 
 RM      	=		rm -f
 
-CFLAGS  	=		-Wall -Wextra -Werror -pthread -g -fsanitize=thread
+CFLAGS  	=		-Wall -Wextra -Werror -pthread #-g -fsanitize=thread
 
 all:				${NAME}
 

@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:55:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/28 15:53:28 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:05:18 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_create_philos(t_data *data)
 	while (data->nb_philo >= i)
 	{
 		data->philo[i] = ft_new_philo(data, i);
-		pthread_mutex_init(&data->straw[i], NULL);
+		pthread_mutex_init(&data->straw[i - 1], NULL);
 		pthread_create(&data->tid[i], NULL, ft_new_thread, data->philo[i]);
 		i++;
 	}
