@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:55:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/28 17:05:18 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:58:01 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 t_philo	*ft_new_philo(t_data *data, int i)
 {
 	t_philo			*philo;
-	struct timeval	time;
 
-	gettimeofday(&time, NULL);
 	philo = malloc(sizeof(t_philo));
 	philo->id = i;
 	data->philo[i] = philo;
 	philo->data = data;
-	philo->last_eat = data->time_start
-		+ (time.tv_sec) * 1000 + (time.tv_usec) / 1000;
+	philo->last_eat = data->time_start;
 	return (philo);
 }
 
