@@ -6,7 +6,7 @@
 /*   By: hguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:30:40 by hguillau          #+#    #+#             */
-/*   Updated: 2023/03/29 14:47:37 by hguillau         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:00:21 by hguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_start_routine(t_philo *philo)
 	while (philo->data->must_eat != (i - 1) && ft_is_alive(philo) != 0)
 	{
 		ft_eat(philo);
-		if (ft_is_alive(philo) != 0)
+		if (ft_is_alive(philo) != 0 && i != philo->data->must_eat)
 			ft_sleep(philo);
 		if (ft_is_alive(philo) != 0)
 			ft_print("is thinking", philo->data->mutex, philo->id, philo);
